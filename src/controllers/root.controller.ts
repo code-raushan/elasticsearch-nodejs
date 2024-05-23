@@ -12,7 +12,7 @@ export const helloWorld = (req: Request, res: Response, next: NextFunction) => {
         all = { ...all, totalmem: os.totalmem() / 1000000000, freemem: os.freemem() / 1000000000 };
     }
     next({
-        message: "Hello from euron-tutorial-admin-backend-server",
+        message: "Hello from elastic-search-nodejs-server",
         env: config.NODE_ENV,
         instance: instanceRandomID,
         version: pjson.version,
