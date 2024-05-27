@@ -5,7 +5,8 @@ const config = {
     REDIS_HOST: process.env.REDIS_HOST! as string,
     REDIS_PORT: process.env.REDIS_PORT! as string,
     PORT: process.env.PORT! as string,
-    NODE_ENV: process.env.NODE_ENV! as string
+    NODE_ENV: process.env.NODE_ENV! as string,
+    ELASTIC_PASSWORD: process.env.ELASTIC_PASSWORD! as string,
 }
 
 export default config;

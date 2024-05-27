@@ -3,6 +3,7 @@ import cluster from "cluster";
 import os from "os";
 import app from "./app";
 import config from "./config";
+import { connectToESClient } from "./utils/elasticsearch";
 import logger from "./utils/logger";
 
 (async () => {
@@ -10,6 +11,7 @@ import logger from "./utils/logger";
     const numCPUs = process.env.NODE_ENV === "production" ? os.cpus().length : 1;
     if (cluster.isPrimary) {
         logger.info(`Master ${process.pid} is running`);
+        await connectToESClient();
 
         // Fork workers...
         for (let i = 0; i < numCPUs; i++) {

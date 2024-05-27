@@ -79,7 +79,44 @@
 # networks:
 #   elastic:
 
-version: '3'
+# version: '3'
+
+# services:
+#   elasticsearch:
+#     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+#     container_name: es01
+#     environment:
+#       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-changeme}
+#       - discovery.type=single-node
+#       - xpack.security.enrollment.enabled=true
+#     networks:
+#       - elastic
+#     ports:
+#       - 9200:9200
+#     volumes:
+#       - elasticsearch-data:/usr/share/elasticsearch/data
+#     command: ["docker", "cp", "es01:/usr/share/elasticsearch/config/certs/http_ca.crt", "."]
+
+#   kibana:
+#     image: docker.elastic.co/kibana/kibana:8.13.4
+#     container_name: kib01
+#     environment:
+#       - ELASTICSEARCH_HOSTS=http://es01:9200
+#     networks:
+#       - elastic
+#     ports:
+#       - 5601:5601
+#     depends_on:
+#       - elasticsearch
+
+# networks:
+#   elastic:
+#     driver: bridge
+
+# volumes:
+#   elasticsearch-data:
+
+version: '3.8'
 
 services:
   elasticsearch:
@@ -95,12 +132,18 @@ services:
       - 9200:9200
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.13.4
     container_name: kib01
     environment:
       - ELASTICSEARCH_HOSTS=http://es01:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-changeme}
     networks:
       - elastic
     ports:
