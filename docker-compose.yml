@@ -1,41 +1,41 @@
-version: '3'
+version: "3"
+
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
-    container_name: es01
+    image: docker.arvancloud.ir/elasticsearch:7.16.3
+    container_name: elasticsearch
     environment:
+      - bootstrap.memory_lock=true
       - discovery.type=single-node
       - xpack.security.enabled=true
-      - xpack.security.http.ssl.enabled=false  # Disable SSL/TLS temporarily
-      - xpack.security.enrollment.enabled=true
-    networks:
-      - elastic
+      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    deploy:
-      resources:
-        limits:
-          memory: 1GB
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.13.4
-    container_name: kib01
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - xpack.security.enrollment.enabled=true
+      - "9300:9300"
     networks:
       - elastic
+
+  kibana:
+    image: docker.arvancloud.ir/kibana:7.16.3
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
+      - xpack.security.user=elastic
     ports:
       - "5601:5601"
+    networks:
+      - elastic
     depends_on:
       - elasticsearch
 
 networks:
   elastic:
     driver: bridge
-
-volumes:
-  esdata:
-    driver: local
