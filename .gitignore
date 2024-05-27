@@ -6,3 +6,4 @@ dump.rdb
 .env
 .DS_Store
 esdata
+http_ca.crt
