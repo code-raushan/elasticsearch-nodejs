@@ -1,0 +1,22 @@
+elasticsearch:
+  url: https://127.0.0.1:9200
+  ssl:
+    verify: true
+    ca: http_ca.crt
+  username: elastic
+  password: mPKG1TbVUqwXSD8NO_-v
+
+postgresql:
+  dsn: postgresql://euronpgdev:*9fu!2MBTn3AQQbc@euronpgdevdb.cx2qswc2as0g.ap-south-1.rds.amazonaws.com:5432/search_poc
+
+
+mappings:
+  tutorialcategory:
+    table: TutorialCategory
+    index: categories
+    type: _doc
+    fields:
+      id: id
+      categoryName: categoryname
+      createdAt: createdat
+      updatedAt: updatedat
