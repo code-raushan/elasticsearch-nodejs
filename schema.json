@@ -1,7 +1,7 @@
 [
   {
       "database": "postgres",
-      "index": "books",
+      "index": "categories",
       "nodes": {
           "table": "TutorialCategory",
           "columns": [
@@ -9,5 +9,46 @@
               "categoryname"
           ]
       }
+  },
+  {
+    "database": "postgres",
+      "index": "tutorials",
+      "nodes": {
+          "table": "Tutorial",
+          "columns": [
+              "id",
+              "tutorialname",
+              "tutorialdescription",
+              "categoryid",
+              "status"
+          ]
+      }
+  },
+  {
+    "database": "postgres",
+    "index": "topics",
+    "nodes": {
+        "table": "TutorialTopic",
+        "columns": [
+            "id",
+            "topicname",
+            "topicdescription",
+            "tutorialid"
+        ]
+    }
+  },
+  {
+    "database": "postgres",
+    "index": "topics",
+    "nodes": {
+        "table": "TutorialSubTopic",
+        "columns": [
+            "id",
+            "subtopicname",
+            "subtopicdescription",
+            "topicid",
+            "content"
+        ]
+    }
   }
 ]
