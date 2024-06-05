@@ -1,43 +1,13 @@
 [
   {
-    "database": "postgres",
-    "index": "categories_index",
-    "setting": {
-      "number_of_shards": 1,
-      "number_of_replicas": 0
-    },
-    "plugins": [],
-    "pipeline": null,
-    "routing": null,
-    "nodes": {
-      "table": "TutorialCategory",
-      "schema": "public",
-      "columns": [
-        "id",
-        "categoryname",
-        "createdat",
-        "updatedat"
-      ],
-      "children": [],
-      "transform": {
-        "rename": {
-          "categoryname": "categoryName"
-        },
-        "mapping": {
-          "id": {
-            "type": "text"
-          },
-          "categoryName": {
-            "type": "text"
-          },
-          "createdat": {
-            "type": "date"
-          },
-          "updatedat": {
-            "type": "date"
-          }
-        }
+      "database": "postgres",
+      "index": "books",
+      "nodes": {
+          "table": "TutorialCategory",
+          "columns": [
+              "id",
+              "categoryname"
+          ]
       }
-    }
   }
 ]

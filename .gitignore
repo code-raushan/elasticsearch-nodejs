@@ -7,3 +7,4 @@ dump.rdb
 .DS_Store
 esdata
 http_ca.crt
+venv/
