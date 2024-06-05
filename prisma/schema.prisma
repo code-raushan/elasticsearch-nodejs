@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tutorial {
+  id                  String           @id
+  tutorialname        String
+  tutorialdescription String?
+  categoryid          String
+  status              String
+  createdat           DateTime         @db.Timestamptz(6)
+  updatedat           DateTime         @db.Timestamptz(6)
+  TutorialCategory    TutorialCategory @relation(fields: [categoryid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  TutorialTopic       TutorialTopic[]
+}
+
+model TutorialCategory {
+  id           String     @id
+  categoryname String     @unique
+  createdat    DateTime   @db.Timestamptz(6)
+  updatedat    DateTime   @db.Timestamptz(6)
+  Tutorial     Tutorial[]
+}
+
+model TutorialSubTopic {
+  id                  String        @id
+  subtopicname        String
+  topicid             String
+  order               Int
+  subtopicdescription String?
+  content             String?
+  writerid            String?
+  reviewerid          String?
+  writerassignedat    DateTime?     @db.Timestamptz(6)
+  reviewerassignedat  DateTime?     @db.Timestamptz(6)
+  status              String
+  createdat           DateTime      @db.Timestamptz(6)
+  updatedat           DateTime      @db.Timestamptz(6)
+  TutorialTopic       TutorialTopic @relation(fields: [topicid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model TutorialTopic {
+  id               String             @id
+  topicname        String
+  tutorialid       String
+  topicdescription String?
+  order            Int
+  createdat        DateTime           @db.Timestamptz(6)
+  updatedat        DateTime           @db.Timestamptz(6)
+  TutorialSubTopic TutorialSubTopic[]
+  Tutorial         Tutorial           @relation(fields: [tutorialid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}

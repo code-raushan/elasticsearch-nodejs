@@ -39,7 +39,7 @@
   },
   {
     "database": "postgres",
-    "index": "topics",
+    "index": "subtopics",
     "nodes": {
         "table": "TutorialSubTopic",
         "columns": [
