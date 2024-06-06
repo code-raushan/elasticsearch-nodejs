@@ -50,5 +50,19 @@
             "content"
         ]
     }
-  }
+  },
+  {
+    "database": "postgres",
+    "index": "oss",
+    "nodes": {
+        "table": "oss1",
+        "columns": [
+            "id",
+            "c1",
+            "c2",
+            "t",
+            "updated_at"
+        ]
+    }
+   }
 ]
