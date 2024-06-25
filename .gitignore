@@ -8,3 +8,4 @@ dump.rdb
 esdata
 http_ca.crt
 venv/
+*.json
